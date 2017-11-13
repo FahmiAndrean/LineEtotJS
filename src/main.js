@@ -1221,7 +1221,7 @@ this._sendMessage(seq,"Hih lu bukan admin atau staff disini (╬◣д◢)");
       }
 
         if(txt == 'cot:help') {
-           this._sendMessage(seq, '==============================\ncσt αll cσmmαnd\n==============================\n☞ me\n☞ Apakah [KerangAjaib]\n☞ Myid\n☞ cot:Gift\n☞ Halo\n☞ cot:Help\n☞ cot:CreatorBot\n☞ cot:InfoGroup\n☞ cot:GroupCreator\n☞ cot:Tag\n☞ cot:Speed\n☞ Baca Read\n☞ Lihat Pembacaan Read\n☞ cot:Status/Setting\n☞ Hapus Pembacaan Read\n☞ cot:Cancel\n☞ cot:Banlist\n☞ cot:CekID\n☞ cot:StaffList\n☞ Hak Admin Dan Staff\n\n==============================\ncσt ѕтαff ¢σммαи∂\n==============================\n☞ Respon\n☞ cot:OpenUrl\n☞ cot:CloseUrl\n☞ cot:Bye\n☞ cot:spam\n☞ spam [jumlah/text]\n☞ Kick On/Off\n☞ Cancel On/Off\n☞ LockInvite On/Off\n☞ LockUpdateGroup On/Off\n☞ LockJoin On/Off\n☞ LockCancel On/Off\n☞ berfaedah\n☞ cot:Kick「@」\n☞ cot:Msg\n☞ cot:Ban\n☞ cot:Unban\n☞ Bmsg On/Off\n\n==============================\ncσt α∂мιи ¢σммαи∂\n==============================\n☞ cot:Mute\n☞ cot:Unmute\n☞ cot:add:staff\n☞ cot:del:staff\n☞ cot:BroadcastGroup [Text]\n☞ cot:AddContact\n☞ cot:CreateGroup [Jumlah-Nama/Mid]\n\n==============================C̸͟͞y̸͟͞b̸͟͞e̸͟͞r̸͟͞ O̸͟͞p̸͟͞e̸͟͞r̸͟͞a̸͟͞t̸͟͞i̸͟͞o̸͟͞n̸͟͞ T̸͟͞e̸͟͞a̸͟͞m̸͟͞\n==============================');
+           this._sendMessage(seq, '==============================\ncσt αll cσmmαnd\n==============================\n☞ me\n☞ Apakah [KerangAjaib]\n☞ Myid\n☞ cot:Gift\n☞ Halo\n☞ cot:Help\n☞ cot:CreatorBot\n☞ cot:InfoGroup\n☞ cot:GroupCreator\n☞ cot:Tag\n☞ cot:Speed\n☞ Baca Read\n☞ Lihat Pembacaan Read\n☞ cot:Status/Setting\n☞ Hapus Pembacaan Read\n☞ cot:Cancel\n☞ cot:Banlist\n☞ cot:CekID\n☞ cot:StaffList\n☞ join [link group]\n☞ Hak Admin Dan Staff\n\n==============================\ncσt ѕтαff ¢σммαи∂\n==============================\n☞ Respon\n☞ cot:OpenUrl\n☞ cot:CloseUrl\n☞ cot:Bye\n☞ cot:spam\n☞ spam [jumlah/text]\n☞ Kick On/Off\n☞ Cancel On/Off\n☞ LockInvite On/Off\n☞ LockUpdateGroup On/Off\n☞ LockJoin On/Off\n☞ LockCancel On/Off\n☞ berfaedah\n☞ cot:Kick「@」\n☞ cot:Msg\n☞ cot:Ban\n☞ cot:Unban\n☞ Bmsg On/Off\n\n==============================\ncσt α∂мιи ¢σммαи∂\n==============================\n☞ cot:Mute\n☞ cot:Unmute\n☞ cot:add:staff\n☞ cot:del:staff\n☞ cot:BroadcastGroup [Text]\n☞ cot:AddContact\n☞ cot:CreateGroup [Jumlah-Nama/Mid]\n\n==============================C̸͟͞y̸͟͞b̸͟͞e̸͟͞r̸͟͞ O̸͟͞p̸͟͞e̸͟͞r̸͟͞a̸͟͞t̸͟͞i̸͟͞o̸͟͞n̸͟͞ T̸͟͞e̸͟͞a̸͟͞m̸͟͞\n==============================');
         }
 
          if(txt == 'hak admin dan staff' || txt == 'hak staff dan admin') {
@@ -1463,6 +1463,12 @@ let { listMember } = await this.searchGroup(seq.to);
                this._kickMember(seq.to,[target]);
         }
 
+	if(cmd == 'join') { //untuk join group pake qrcode contoh: join line://anu/g/anu
+            const [ ticketId ] = payload.split('g/').splice(-1);
+            let { id } = await this._findGroupByTicket(ticketId);
+            await this._acceptGroupInvitationByTicket(id,ticketId);
+        }
+	    
         if(cmd == 'cot:spam' && isStaff(seq.from)) {
             for(var i= 0; i < 10;  i++) {
                this._sendMessage(seq, 'KNTLO LU');
